@@ -9,6 +9,7 @@ import javax.swing.*;
 public class Main 
 {
 	private static JFrame fenster;
+	
 	public static void main(String[] args) 
 	{
 		Message.printMessage();
