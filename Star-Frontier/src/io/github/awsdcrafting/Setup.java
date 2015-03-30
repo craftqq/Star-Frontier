@@ -9,7 +9,6 @@ public class Setup
 	
 	public static void load()
 	{
-		System.out.println("Welcome to Star Frontier!");
 		String[] settings = DateiLeser.leseDatei("settings.txt");
 		for(String s: settings)
 		{
