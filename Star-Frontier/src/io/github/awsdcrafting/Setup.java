@@ -5,7 +5,7 @@ public class Setup
 	
 	public static void doStuff()
 	{
-		System.out.println("This is a Game!");
+		System.out.println("Welcome to Star Frontier!");
 	}
 
 }
