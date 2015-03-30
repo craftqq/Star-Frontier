@@ -1,7 +1,14 @@
 package io.github.craftqq;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class StartFenster extends JFrame {
+public class StartFenster extends JFrame 
+{
 
+	public StartFenster()
+	{
+		
+		
+	}
+	
 }
