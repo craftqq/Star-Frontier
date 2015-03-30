@@ -1,4 +1,4 @@
-package io.github.craftqq;
+package io.github.craftqq.FileIO;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

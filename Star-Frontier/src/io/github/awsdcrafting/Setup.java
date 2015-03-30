@@ -1,6 +1,6 @@
 package io.github.awsdcrafting;
 
-import io.github.craftqq.DateiLeser;
+import io.github.craftqq.FileIO.DateiLeser;
 
 public class Setup
 {
