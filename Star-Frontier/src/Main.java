@@ -13,6 +13,8 @@ public class Main
 		System.out.println("Hello World!");
 		Setup.load();
 		fenster = new StartFenster();
+		System.out.println(String.valueOf(Setup.music));
+		System.out.println(String.valueOf(Setup.sound));
 	}
 
 }
