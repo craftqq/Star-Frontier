@@ -1,0 +1,2 @@
+sound = true
+music = true
