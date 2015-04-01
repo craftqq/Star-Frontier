@@ -1,4 +1,4 @@
-package io.github.craftqq;
+package io.github.craftqq.GUI;
 
 import javax.swing.*;
 import java.awt.*;

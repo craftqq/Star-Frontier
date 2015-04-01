@@ -2,7 +2,8 @@
 
 import io.github.awsdcrafting.Message;
 import io.github.awsdcrafting.Setup;
-import io.github.craftqq.StartFenster;
+import io.github.craftqq.GUI.JElementHelper;
+import io.github.craftqq.GUI.StartFenster;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -17,8 +18,6 @@ public class Main
 		Message.printMessage();
 		Setup.load();
 		fenster = new StartFenster();
-		System.out.println(String.valueOf(Setup.music));
-		System.out.println(String.valueOf(Setup.sound));
 	}
 
 }
