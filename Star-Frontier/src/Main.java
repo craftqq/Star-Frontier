@@ -17,7 +17,7 @@ public class Main
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Message.printMessage();
 		Setup.load();
-		fenster = new Fenster();
+		fenster = new Fenster("Star Frontier", 1600, 900);
 		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenster.initialize();
 	}

@@ -11,15 +11,15 @@ public class Fenster extends JFrame
 	private JMenuBar menuBar;
 	private JPanel contentPane;
 	
-	public Fenster()
+	public Fenster(String title, int width, int height)
 	{
-        this.setTitle("Star Frontier");
-        this.setSize(800, 600);
+        this.setTitle(title);
+        this.setSize(width, height);
         generateMenu();
         this.setJMenuBar(menuBar);
         
         contentPane = new JPanel(null);
-        contentPane.setPreferredSize(new Dimension(800,600));
+        contentPane.setPreferredSize(new Dimension(width,height));
         contentPane.setBackground(new Color(225,245,255));
 	}
 	
