@@ -12,4 +12,10 @@ public abstract class Waffe
 	{
 		return type;
 	}
+	
+	public abstract boolean hasReloaded();
+	
+	public abstract int gibReichweite();
+	
+	public abstract int gibSchaden();
 }
