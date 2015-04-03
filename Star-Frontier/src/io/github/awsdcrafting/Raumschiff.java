@@ -1,5 +1,6 @@
 package io.github.awsdcrafting;
 
-public class Raumschiff {
+public class Raumschiff 
+{
 
 }
