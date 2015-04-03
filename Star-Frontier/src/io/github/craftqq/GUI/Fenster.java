@@ -4,25 +4,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class StartFenster extends JFrame 
+public class Fenster extends JFrame 
 {
 	private static final long serialVersionUID = 155551L;
 	
 	private JMenuBar menuBar;
+	private JPanel contentPane;
 	
-	public StartFenster()
+	public Fenster()
 	{
         this.setTitle("Star Frontier");
         this.setSize(800, 600);
         generateMenu();
         this.setJMenuBar(menuBar);
         
-        JPanel contentPane = new JPanel(null);
+        contentPane = new JPanel(null);
         contentPane.setPreferredSize(new Dimension(800,600));
-        contentPane.setBackground(new Color(192,192,192));
-
+        contentPane.setBackground(new Color(225,245,255));
+	}
+	
+	public void addToContentPane(JComponent component)
+	{
+		contentPane.add(component);
+	}
+	
+	public void initialize()
+	{
         this.add(contentPane);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(true);
