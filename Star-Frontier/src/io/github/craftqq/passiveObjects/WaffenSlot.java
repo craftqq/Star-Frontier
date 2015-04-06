@@ -1,6 +1,6 @@
 package io.github.craftqq.passiveObjects;
 
-public class WaffenSlot 
+public class WaffenSlot implements PassiveObject
 {
 	private int maxClass;
 	private int size;
