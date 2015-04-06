@@ -1,6 +1,6 @@
 package io.github.awsdcrafting;
 
-import io.github.craftqq.waffen.WaffenSlot;
+import io.github.craftqq.passiveObjects.WaffenSlot;
 
 public class Raumschiff 
 {

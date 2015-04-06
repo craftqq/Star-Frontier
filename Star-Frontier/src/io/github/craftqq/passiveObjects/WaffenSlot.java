@@ -1,4 +1,4 @@
-package io.github.craftqq.waffen;
+package io.github.craftqq.passiveObjects;
 
 public class WaffenSlot 
 {

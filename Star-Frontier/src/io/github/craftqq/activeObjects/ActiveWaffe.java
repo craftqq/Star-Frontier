@@ -1,6 +1,6 @@
-package io.github.craftqq.waffen;
+package io.github.craftqq.activeObjects;
 
-public abstract class Waffe 
+public abstract class ActiveWaffe 
 {
 	protected int type;
 	public static final int WEAPON_NONE = 0;

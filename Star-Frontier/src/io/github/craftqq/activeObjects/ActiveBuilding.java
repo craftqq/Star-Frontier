@@ -1,4 +1,4 @@
-package io.github.craftqq.activeGame;
+package io.github.craftqq.activeObjects;
 
 public class ActiveBuilding implements ActiveObject
 {
