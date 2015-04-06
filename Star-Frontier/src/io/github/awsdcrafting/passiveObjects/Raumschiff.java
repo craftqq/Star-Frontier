@@ -1,4 +1,4 @@
-package io.github.awsdcrafting;
+package io.github.awsdcrafting.passiveObjects;
 
 import io.github.craftqq.passiveObjects.WaffenSlot;
 
