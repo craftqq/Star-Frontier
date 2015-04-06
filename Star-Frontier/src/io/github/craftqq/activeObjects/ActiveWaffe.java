@@ -5,8 +5,9 @@ public abstract class ActiveWaffe
 	protected int type;
 	public static final int WEAPON_NONE = 0;
 	public static final int WEAPON_CANNON = 1;
-	public static final int WEAPON_ROCKET = 2;
-	public static final int WEAPON_BOMB = 3;
+	public static final int WEAPON_LASER = 2;
+	public static final int WEAPON_ROCKET = 3;
+	public static final int WEAPON_BOMB = 4;
 	
 	public int gibType()
 	{
