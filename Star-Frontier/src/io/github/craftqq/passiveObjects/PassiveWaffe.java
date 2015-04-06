@@ -14,8 +14,9 @@ public class PassiveWaffe implements BuyablePassiveObject
 	protected int schaden;
 	protected Preis preis;
 	protected int nachladeZeit;
+	protected String name;
 	
-	public PassiveWaffe(int type_, int genauigkeit_, int reichweite_, int schaden_, Preis preis_, int nachladeZeit_)
+	public PassiveWaffe(int type_, int genauigkeit_, int reichweite_, int schaden_, Preis preis_, int nachladeZeit_, String name_)
 	{
 		type = type_;
 		genauigkeit = genauigkeit_;
@@ -23,6 +24,7 @@ public class PassiveWaffe implements BuyablePassiveObject
 		schaden = schaden_;
 		preis = preis_;
 		nachladeZeit = nachladeZeit_;
+		name = name_;
 	}
 	
 	public int gibType()
@@ -55,6 +57,12 @@ public class PassiveWaffe implements BuyablePassiveObject
 	public Preis gibPreis()
 	{
 		return preis;
+	}
+
+	@Override
+	public String gibName()
+	{
+		return name;
 	}
 
 }
