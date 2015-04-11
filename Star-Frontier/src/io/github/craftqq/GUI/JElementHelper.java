@@ -59,5 +59,16 @@ public class JElementHelper
         comboBox.setVisible(true);
         return comboBox;
     }
-
+    
+    public static <T> JList<T> baueList(int x, int y)
+    {
+        JList<T> list = new JList<T>();
+        list.setBounds(x, y, 140, 35);
+        list.setBackground(new Color(214, 217, 223));
+        list.setForeground(new Color(0, 0, 0));
+        list.setEnabled(true);
+        list.setFont(new Font("sansserif", 0, 12));
+        list.setVisible(true);
+        return list;
+    }
 }
