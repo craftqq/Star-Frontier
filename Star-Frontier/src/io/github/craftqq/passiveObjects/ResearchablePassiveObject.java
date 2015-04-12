@@ -5,5 +5,5 @@ public interface ResearchablePassiveObject extends PassiveObject
 	
 	public int anzahlResearchPoints();
 	
-	public int klasse();
+	public int researchKlasse();
 }

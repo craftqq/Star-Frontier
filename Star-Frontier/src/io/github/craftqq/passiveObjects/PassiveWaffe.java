@@ -1,6 +1,6 @@
 package io.github.craftqq.passiveObjects;
 
-public class PassiveWaffe implements BuyablePassiveObject 
+public class PassiveWaffe implements BuyablePassiveObject, ResearchablePassiveObject 
 {
 	public static final int WEAPON_NONE = 0;
 	public static final int WEAPON_CANNON = 1;
@@ -63,6 +63,18 @@ public class PassiveWaffe implements BuyablePassiveObject
 	public String gibName()
 	{
 		return name;
+	}
+
+	@Override
+	public int anzahlResearchPoints() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int researchKlasse() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
