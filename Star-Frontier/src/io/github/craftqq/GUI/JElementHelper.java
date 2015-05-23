@@ -48,6 +48,20 @@ public class JElementHelper
         return eingabe;
     }
     
+    public static JTextField baueTextField(String text, int x, int y)
+    {
+    	JTextField feld = new JTextField();
+        feld.setBounds(x,y,140,35);
+        feld.setBackground(new Color(255,255,255));
+        feld.setForeground(new Color(0,0,0));
+        feld.setEnabled(true);
+        feld.setFont(new Font("SansSerif",0,12));
+        feld.setText(text);
+        feld.setBorder(BorderFactory.createBevelBorder(1));
+        feld.setVisible(true);
+        return feld;
+    }
+    
     public static <T> JComboBox<T> baueComboBox(int x, int y)
     {
         JComboBox<T> comboBox = new JComboBox<T>();
