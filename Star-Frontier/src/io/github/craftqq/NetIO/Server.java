@@ -53,7 +53,8 @@ public class Server extends Thread
 				e.printStackTrace();
 				continue;
 			}
-			Connection c = new Connection(so, nextIdentifier());
+			int i = nextIdentifier();
+			Connection c = new Connection(so, i);
 			connections.add(c);
 			c.run();
 		}
@@ -73,12 +74,37 @@ public class Server extends Thread
 		}
 	}
 	
+	public void sendTo(String s, int identifier)
+	{
+		for(Connection c: connections)
+		{
+			if(c.getIdentifier() == identifier)
+			{
+				c.send(s);
+			}
+		}
+	}
+	
+	public void sendExcept(String s, int identifier)
+	{
+		for(Connection c: connections)
+		{
+			if(c.getIdentifier() == identifier)
+			{
+				continue;
+			}
+			c.send(s);
+		}
+	}
+	
 	public String[] getAll()
 	{
 		ArrayList<String> receiveStrings = new ArrayList<String>();
-		for(Connection c: connections)
+		for(Connection c:connections)
 		{
-			receiveStrings.add(c.receive());
+			int i = c.getIdentifier();
+			String s = c.receive();
+			receiveStrings.add("IDENTIFIER:"+i+";"+s);
 		}
 		return receiveStrings.toArray(new String[0]);
 	}
@@ -114,6 +140,11 @@ class Connection extends Thread
 		this(client, 0);
 	}
 	
+	public int getIdentifier()
+	{
+		return identifier;
+	}
+	
 	protected void close()
 	{
 		try {
@@ -139,6 +170,7 @@ class Connection extends Thread
 			while(br.ready())
 			{
 				s = s.concat(br.readLine());
+				s = s.concat(";");
 			}
 		}
 		catch(Exception e)
