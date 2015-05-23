@@ -59,6 +59,7 @@ public class Server extends Thread
 		}
 		for(Connection c: connections)
 		{
+			c.send("CONNECTION:CLOSE");
 			c.close();
 		}
 		return;
