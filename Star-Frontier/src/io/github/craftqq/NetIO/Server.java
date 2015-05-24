@@ -1,19 +1,29 @@
 package io.github.craftqq.NetIO;
 
+import io.github.craftqq.utility.BidirectionalMap;
+import io.github.craftqq.utility.Observable;
+import io.github.craftqq.utility.ObservableObserver;
+import io.github.craftqq.utility.Observer;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Server extends Thread
+public class Server extends Thread implements ObservableObserver
 {
 	protected ServerSocket server;
 	protected boolean running;
-	protected ArrayList<Connection> connections;
+	protected HashMap<Integer, Connection> connections;
+	protected BidirectionalMap<Integer, String> clientNames;
 	protected int port;
 	protected int next;
+	private int id;
+	private ArrayList<Observer> observers;
+	
 	
 	public Server()
 	{
@@ -22,9 +32,19 @@ public class Server extends Thread
 	
 	public Server(int port_)
 	{
-		connections = new ArrayList<Connection>();
+		connections = new HashMap<Integer, Connection>();
+		clientNames = new BidirectionalMap<Integer, String>();
+		observers = new ArrayList<Observer>();
 		port = port_;
 		next = 0;
+		id = 0;
+	}
+	
+	private synchronized int nextIdentifier()
+	{
+		int i = id;
+		id++;
+		return i;
 	}
 	
 	public void run()
@@ -53,12 +73,16 @@ public class Server extends Thread
 				e.printStackTrace();
 				continue;
 			}
-			int i = nextIdentifier();
-			Connection c = new Connection(so, i);
-			connections.add(c);
+			Connection c = new Connection(so);
+			synchronized(this){
+				int i = nextIdentifier();
+				clientNames.put(i, "Guest_"+i);
+				connections.put(i,c);
+			}
+			c.subscribe(this);
 			c.run();
 		}
-		for(Connection c: connections)
+		for(Connection c: connections.values())
 		{
 			c.send("CONNECTION:CLOSE");
 			c.close();
@@ -68,28 +92,24 @@ public class Server extends Thread
 	
 	public void sendAll(String s)
 	{
-		for(Connection c: connections)
+		for(Connection c: connections.values())
 		{
 			c.send(s);
 		}
 	}
 	
-	public void sendTo(String s, int identifier)
+	public void sendTo(String s, String recipient)
 	{
-		for(Connection c: connections)
-		{
-			if(c.getIdentifier() == identifier)
-			{
-				c.send(s);
-			}
-		}
+		Connection c = connections.get(recipient);
+		c.send(s);
 	}
 	
-	public void sendExcept(String s, int identifier)
+	public void sendExcept(String s, String excluded)
 	{
-		for(Connection c: connections)
+		int i = clientNames.getKey(excluded);
+		for(Connection c:connections.values())
 		{
-			if(c.getIdentifier() == identifier)
+			if(c.getIdentifier() == i)
 			{
 				continue;
 			}
@@ -97,37 +117,61 @@ public class Server extends Thread
 		}
 	}
 	
-	public String[] getAll()
-	{
-		ArrayList<String> receiveStrings = new ArrayList<String>();
-		for(Connection c:connections)
-		{
-			int i = c.getIdentifier();
-			String s = c.receive();
-			receiveStrings.add("IDENTIFIER:"+i+";"+s);
-		}
-		return receiveStrings.toArray(new String[0]);
-	}
-	
-	protected synchronized int nextIdentifier()
-	{
-		int i = next;
-		next++;
-		return i;
-	}
-	
 	public void stopServer()
 	{
 		running = false;
 	}
+
+	@Override
+	public void subscribe(Observer o) 
+	{
+		observers.add(o);
+	}
+
+	@Override
+	public void unsubscribe(Observer o) 
+	{
+		observers.remove(o);
+	}
+
+	@Override
+	public void notify(String message, Observable source)
+	{
+		Connection c = (Connection)source;
+		if(message.toLowerCase().toUpperCase().startsWith("CONNECTION"))
+		{
+			String s = message.substring(11);
+			if(s.equalsIgnoreCase("CLOSE"))
+			{
+				c.close();
+				connections.remove(c.getIdentifier());
+				clientNames.removeByKey(c.getIdentifier());
+			}
+			else if(s.toLowerCase().toUpperCase().startsWith("NEWNAME"))
+			{
+				String name = s.substring(8);
+				int i = c.getIdentifier();
+				clientNames.removeByKey(i);
+				clientNames.put(i, name);
+			}
+		}
+		else
+		{
+			for(Observer o: observers)
+			{
+				o.notify(message, this);
+			}
+		}
+	}
 }
-class Connection extends Thread
+class Connection extends Thread implements Observable
 {
 	protected Socket socket;
 	protected PrintWriter pw;
 	protected BufferedReader br;
 	protected boolean alive;
 	protected int identifier;
+	private ArrayList<Observer> observers;
 	
 	public Connection(Socket client, int identifier_)
 	{
@@ -162,24 +206,6 @@ class Connection extends Thread
 		pw.write(s);
 	}
 	
-	public String receive()
-	{
-		String s = "";
-		try
-		{
-			while(br.ready())
-			{
-				s = s.concat(br.readLine());
-				s = s.concat(";");
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return s;
-	}
-	
 	public void run()
 	{
 		try
@@ -199,7 +225,25 @@ class Connection extends Thread
 		alive = true;
 		while(alive)
 		{
-			
+			try
+			{
+				if(br.ready())
+				{
+					String s = "";
+					while(br.ready())
+					{
+						s = s.concat(br.readLine()+"\n");
+					}
+					for(Observer o: observers)
+					{
+						o.notify(s, this);
+					}
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 		return;
 	}
@@ -207,5 +251,17 @@ class Connection extends Thread
 	protected void stopClient()
 	{
 		alive = false;
+	}
+
+	@Override
+	public void subscribe(Observer o) 
+	{
+		observers.add(o);
+	}
+
+	@Override
+	public void unsubscribe(Observer o) 
+	{
+		observers.remove(o);
 	}
 }

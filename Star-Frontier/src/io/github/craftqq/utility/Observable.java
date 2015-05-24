@@ -1,4 +1,5 @@
-package io.github.craftqq.observe;
+package io.github.craftqq.utility;
+
 
 public interface Observable 
 {
