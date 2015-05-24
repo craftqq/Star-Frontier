@@ -5,7 +5,6 @@ import io.github.awsdcrafting.Setup;
 import io.github.craftqq.GUI.ChatTextArea;
 import io.github.craftqq.GUI.Fenster;
 import io.github.craftqq.GUI.JElementHelper;
-import io.github.craftqq.chat.ChatManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,16 +17,13 @@ import javax.swing.text.DefaultCaret;
 public class Main 
 {
 	private static Fenster fenster;
-	private static boolean connected;
 	private static JTextField chatEingabe;
 	private static ChatTextArea chat;
 	private static JScrollPane scrollChat;
-	private static ChatManager chatMGR;
 	
 	
 	public static void main(String[] args) 
 	{
-		connected = false;
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Message.printMessage();
 		Setup.load();
@@ -40,12 +36,7 @@ public class Main
 			public void actionPerformed(ActionEvent e) 
 			{
 				String text = chatEingabe.getText();
-				if(connected)
-				{
-					chatMGR.send(text);
-				}
-				text = "\n" + text;
-				chat.append(text);
+				chat.append("\n"+text);
 				chatEingabe.setText("");
 			}
 		});
