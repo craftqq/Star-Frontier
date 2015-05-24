@@ -64,8 +64,8 @@ public class ChatTextArea extends JTextArea
                 	{
                     	Element first = root.getElement(0);
                     	doc.remove(0, first.getEndOffset());
-                        doc.insertString(doc.getLength(), s, null);
                 	}
+                    doc.insertString(doc.getLength(), s, null);
             	}
             	else
             	{
@@ -76,7 +76,7 @@ public class ChatTextArea extends JTextArea
             }
             catch (BadLocationException e) 
             {
-            	
+            	e.printStackTrace();
             }
         }
 	}

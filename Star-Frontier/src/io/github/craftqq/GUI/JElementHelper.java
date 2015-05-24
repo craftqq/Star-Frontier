@@ -121,12 +121,12 @@ public class JElementHelper
     
     public static JScrollPane baueScrollPane(JComponent component, int x, int y, int xSize, int ySize)
     {
+    	component.setBorder(BorderFactory.createEmptyBorder());
         JScrollPane scrollPane = new JScrollPane(component);
         scrollPane.setBounds(x,y,xSize,ySize);
         scrollPane.setBackground(new Color(255,255,255));
         scrollPane.setForeground(new Color(0,0,0));
         scrollPane.setEnabled(true);
-        scrollPane.setFont(new Font("SansSerif",0,12));
         scrollPane.setBorder(BorderFactory.createBevelBorder(1));
         scrollPane.setVisible(true);
         return scrollPane;
@@ -137,6 +137,19 @@ public class JElementHelper
     	return baueTextField(text, x, y, 140, 35);
     }
     
+    public static JTextField baueTextField(String text, int x, int y, ActionListener listener)
+    {
+    	JTextField feld = baueTextField(text, x, y);
+    	feld.addActionListener(listener);
+    	return feld;
+    }
+    
+    public static JTextField baueTextField(String text, int x, int y, int xSize, int ySize, ActionListener listener)
+    {
+    	JTextField feld = baueTextField(text, x, y, xSize, ySize);
+    	feld.addActionListener(listener);
+    	return feld;
+    }
     public static JTextField baueTextField(String text, int x, int y, int xSize, int ySize)
     {
     	JTextField feld = new JTextField();
