@@ -92,14 +92,17 @@ public class Client extends Thread
 		pw.write(s);
 	}
 	
-	public String receive()
+	public synchronized String receive()
 	{
 		String s = "";
 		try
 		{
-			while(br.ready())
+			if(br.ready())
 			{
-				s = s.concat(br.readLine());
+				while(br.ready())
+				{
+					s = s.concat(br.readLine() + "\n");
+				}
 			}
 		}
 		catch(Exception e)
