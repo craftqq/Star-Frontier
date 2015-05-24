@@ -20,23 +20,44 @@ import javax.swing.text.Element;
 public class JElementHelper 
 {
 	public static JButton baueKnopf(String text, int x, int y, ActionListener listener)
+	{
+		return baueKnopf(text, x, y, 140, 35, listener);
+	}
+	
+	public static JButton baueKnopf(String text, int x, int y, int xSize, int ySize, ActionListener listener)
+	{
+		JButton knopf = baueKnopf(text, x, y, xSize, ySize);
+        knopf.addActionListener(listener);
+        return knopf;
+	}
+	
+	public static JButton baueKnopf(String text, int x, int y)
+    {
+		return baueKnopf(text, x, y, 140, 35);
+    }
+	
+	public static JButton baueKnopf(String text, int x, int y, int xSize, int ySize)
     {
         JButton knopf = new JButton();
-        knopf.setBounds(x,y,140,35);
+        knopf.setBounds(x,y,xSize,ySize);
         knopf.setBackground(new Color(214,217,223));
         knopf.setForeground(new Color(0,0,0));
         knopf.setEnabled(true);
         knopf.setFont(new Font("SansSerif",0,12));
         knopf.setText(text);
         knopf.setVisible(true);
-        knopf.addActionListener(listener);
         return knopf;
     }
-    
-    public static JLabel baueLabel(String text, int x, int y)
+	
+	public static JLabel baueLabel(String text, int x, int y)
+	{
+		return baueLabel(text, x, y, 140, 35);
+	}
+
+	public static JLabel baueLabel(String text, int x, int y, int xSize, int ySize)
     {
         JLabel label = new JLabel();
-        label.setBounds(x,y,140,35);
+        label.setBounds(x,y,xSize,ySize);
         label.setBackground(new Color(214,217,223));
         label.setForeground(new Color(0,0,0));
         label.setEnabled(true);
@@ -46,10 +67,15 @@ public class JElementHelper
         return label;
     }
     
-    public static JTextArea baueTextArea(String text, int x, int y)
+	public static JTextArea baueTextArea(String text, int x, int y)
+    {
+		return baueTextArea(text, x, y, 140, 35);
+    }
+	
+    public static JTextArea baueTextArea(String text, int x, int y, int xSize, int ySize)
     {
         JTextArea eingabe = new JTextArea();
-        eingabe.setBounds(x,y,140,35);
+        eingabe.setBounds(x,y,xSize,ySize);
         eingabe.setBackground(new Color(255,255,255));
         eingabe.setForeground(new Color(0,0,0));
         eingabe.setEnabled(true);
@@ -62,8 +88,13 @@ public class JElementHelper
     
     public static JTextArea baueChatStyleTextArea(String text, int x, int y)
     {
+    	return baueChatStyleTextArea(text, x, y, 140, 35);
+    }
+    
+    public static JTextArea baueChatStyleTextArea(String text, int x, int y, int xSize, int ySize)
+    {
         ChatTextArea ausgabe = new ChatTextArea();
-        ausgabe.setBounds(x,y,140,35);
+        ausgabe.setBounds(x,y,xSize,ySize);
         ausgabe.setBackground(new Color(255,255,255));
         ausgabe.setForeground(new Color(0,0,0));
         ausgabe.setEnabled(true);
@@ -78,8 +109,13 @@ public class JElementHelper
     
     public static JTextField baueTextField(String text, int x, int y)
     {
+    	return baueTextField(text, x, y, 140, 35);
+    }
+    
+    public static JTextField baueTextField(String text, int x, int y, int xSize, int ySize)
+    {
     	JTextField feld = new JTextField();
-        feld.setBounds(x,y,140,35);
+        feld.setBounds(x,y,xSize,ySize);
         feld.setBackground(new Color(255,255,255));
         feld.setForeground(new Color(0,0,0));
         feld.setEnabled(true);
@@ -92,8 +128,13 @@ public class JElementHelper
     
     public static <T> JComboBox<T> baueComboBox(int x, int y)
     {
+    	return baueComboBox(x, y, 140, 35);
+    }
+    
+    public static <T> JComboBox<T> baueComboBox(int x, int y, int xSize, int ySize)
+    {
         JComboBox<T> comboBox = new JComboBox<T>();
-        comboBox.setBounds(x, y, 140, 35);
+        comboBox.setBounds(x, y, xSize, ySize);
         comboBox.setBackground(new Color(214, 217, 223));
         comboBox.setForeground(new Color(0, 0, 0));
         comboBox.setEnabled(true);
@@ -104,8 +145,13 @@ public class JElementHelper
     
     public static <T> JList<T> baueList(int x, int y)
     {
+    	return baueList(x, y, 140, 35);
+    }
+    
+    public static <T> JList<T> baueList(int x, int y, int xSize, int ySize)
+    {
         JList<T> list = new JList<T>();
-        list.setBounds(x, y, 140, 35);
+        list.setBounds(x, y, xSize, ySize);
         list.setBackground(new Color(214, 217, 223));
         list.setForeground(new Color(0, 0, 0));
         list.setEnabled(true);
