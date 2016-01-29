@@ -8,6 +8,8 @@ import io.github.craftqq.GUI.JElementHelper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -24,6 +26,15 @@ public class Main
 	
 	public static void main(String[] args) 
 	{
+		File f;
+		String s = System.getProperty("user.home") + File.separator + ".star-frontier";
+		f = new File(s);
+		if(!f.exists())
+		{
+			f.mkdir();
+		}
+		String path = f.getAbsolutePath();
+		System.setProperty("user.dir", path);
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Message.printMessage();
 		Setup.load();

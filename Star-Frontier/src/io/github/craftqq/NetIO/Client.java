@@ -31,33 +31,6 @@ public class Client extends Thread implements Observable
 		this(host_, 55055);
 	}
 	
-	public void connect()
-	{
-		try
-		{
-			socket = new Socket(host, port);
-			connected = true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println();
-			System.out.println("Could not connect!");
-			connected = false;
-			return;
-		}
-		try
-		{
-			pw = new PrintWriter(socket.getOutputStream());
-			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			connected  = false;
-		}
-	}
-	
 	public void closeConnection()
 	{
 		pw.write("CONNECTION:CLOSE");
@@ -96,6 +69,30 @@ public class Client extends Thread implements Observable
 	
 	public void run()
 	{
+		try
+		{
+			socket = new Socket(host, port);
+			connected = true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println();
+			System.out.println("Could not connect!");
+			connected = false;
+			return;
+		}
+		try
+		{
+			pw = new PrintWriter(socket.getOutputStream());
+			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			connected  = false;
+		}
+		
 		while(connected)
 		{
 			String s = "";
