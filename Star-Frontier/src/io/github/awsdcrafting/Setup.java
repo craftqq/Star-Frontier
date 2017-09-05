@@ -1,10 +1,8 @@
 package io.github.awsdcrafting;
 
 import io.github.craftqq.FileIO.DateiLeser;
-import io.github.craftqq.FileIO.DateiSchreiber;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Setup
 {

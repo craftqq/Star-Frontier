@@ -11,7 +11,11 @@ import javax.swing.JPanel;
 
 public class Bild extends JPanel 
 {
-	private BufferedImage img;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 7818554427936626541L;
+    private BufferedImage img;
 	private boolean drawAll;
 	private boolean isValid;
 	
